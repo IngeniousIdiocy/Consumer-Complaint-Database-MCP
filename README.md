@@ -1,6 +1,6 @@
 # Consumer-Complaint-Database-MCP
 
-This repository contains a local-only [MCP](https://github.com/anthropics/mcp) server for querying the U.S. Consumer Financial Protection Bureau (CFPB) Consumer Complaint Database.  The server is designed to be launched via standard input/output, making it ideal for integration with tools such as Claude Desktop.
+This repository contains a local-only [MCP](https://www.anthropic.com/news/model-context-protocol) server for querying the U.S. Consumer Financial Protection Bureau (CFPB) Consumer Complaint Database.  The server is designed to be launched via standard input/output, making it ideal for integration with tools such as Claude Desktop.
 
 ## Files
 
