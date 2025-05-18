@@ -61,3 +61,7 @@ The `claude_desktop_config.json` file includes an example entry pointing to the 
 - [Model Context Protocol quickstart tutorial](https://modelcontextprotocol.io/quickstart/server) – tutorial that helped build this example.
 
 ![MCP usage in Claude](https://raw.githubusercontent.com/IngeniousIdiocy/Consumer-Complaint-Database-MCP/main/banking_complaint_mcp_usage.png)
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

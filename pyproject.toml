@@ -1,6 +1,7 @@
 [project]
 name = "banking-complaints"
 version = "0.1.0"
+license = "MIT"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
