@@ -2,6 +2,7 @@ import json
 import sys
 import types
 import unittest
+from pathlib import Path
 from unittest.mock import patch, AsyncMock
 
 # Provide dummy mcp module hierarchy
@@ -67,11 +68,13 @@ if 'dateutil' not in sys.modules:
 
 from complaints import search_complaints, Complaint
 
+TEST_DIR = Path(__file__).parent
+
 class SearchComplaintsTest(unittest.IsolatedAsyncioTestCase):
     async def test_search_complaints(self):
-        with open('test_query.json') as f:
+        with open(TEST_DIR / 'data' / 'test_query.json') as f:
             query = json.load(f)
-        with open('test_query_response.json') as f:
+        with open(TEST_DIR / 'data' / 'test_query_response.json') as f:
             raw_results = json.load(f)
         expected = [Complaint.from_json(item) for item in raw_results]
 
