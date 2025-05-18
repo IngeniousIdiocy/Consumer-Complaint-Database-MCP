@@ -53,23 +53,44 @@ _CFPB_ENDPOINT = (
 class Complaint:
     complaint_id: str
     date_received: str
+    date_sent_to_company: str | None
     product: str
+    sub_product: str | None
     issue: str
+    sub_issue: str | None
     consumer_complaint_narrative: str
+    consumer_consent_provided: str | None
     company: str
+    company_public_response: str | None
+    company_response_to_consumer: str | None
+    timely_response: str | None
+    consumer_disputed: str | None
     state: str | None
+    zip_code: str | None
+    submitted_via: str | None
+    tags: list[str] | None
 
     @classmethod
     def from_json(cls, item: dict) -> "Complaint":
         attrs = {
             "complaint_id": item.get("complaint_id"),
             "date_received": item.get("date_received"),
+            "date_sent_to_company": item.get("date_sent_to_company"),
             "product": item.get("product"),
+            "sub_product": item.get("sub_product"),
             "issue": item.get("issue"),
-            "consumer_complaint_narrative": item.get("consumer_complaint_narrative")
-            or "",
+            "sub_issue": item.get("sub_issue"),
+            "consumer_complaint_narrative": item.get("consumer_complaint_narrative") or "",
+            "consumer_consent_provided": item.get("consumer_consent_provided"),
             "company": item.get("company"),
+            "company_public_response": item.get("company_public_response"),
+            "company_response_to_consumer": item.get("company_response_to_consumer"),
+            "timely_response": item.get("timely_response"),
+            "consumer_disputed": item.get("consumer_disputed"),
             "state": item.get("state"),
+            "zip_code": item.get("zip_code"),
+            "submitted_via": item.get("submitted_via"),
+            "tags": item.get("tags"),
         }
         return cls(**attrs)
 
@@ -123,6 +144,11 @@ async def search_complaints(
         "'Citizens Bank, N.A.', 'Regions Bank', 'KeyBank National Association', "
         "'Huntington National Bank'."
     ] = None,
+    product: Annotated[
+        str | None,
+        "Exact CFPB product category (e.g., 'Mortgage', 'Credit card', 'Auto loan or lease', "
+        "'Checking or savings account')."
+    ] = None,
     since: Annotated[
         str | None,
         "Only return complaints received **on or after** this date "
@@ -174,6 +200,8 @@ async def search_complaints(
         es_query["field"] = "all"
     if company:
         es_query["company"] = company
+    if product:
+        es_query["product"] = product
     if since_iso:
         es_query["date_received_min"] = since_iso
     if narrative_only:
