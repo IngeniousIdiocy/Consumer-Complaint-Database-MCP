@@ -59,3 +59,5 @@ The `claude_desktop_config.json` file includes an example entry pointing to the 
 
 - [CFPB Consumer Complaint Database API documentation](https://cfpb.github.io/ccdb5-api/documentation/) – underlying API used by this MCP server.
 - [Model Context Protocol quickstart tutorial](https://modelcontextprotocol.io/quickstart/server) – tutorial that helped build this example.
+
+![MCP usage in Claude](https://raw.githubusercontent.com/IngeniousIdiocy/Consumer-Complaint-Database-MCP/main/banking_complaint_mcp_usage.png)
