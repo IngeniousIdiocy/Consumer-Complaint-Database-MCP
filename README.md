@@ -39,6 +39,17 @@ uv run complaints.py
 
 The server runs over stdio only and waits for requests from an MCP-aware client (e.g., Claude Desktop).
 
+## Running tests
+
+Execute the unit tests using Python's unittest discovery. From the repository
+root, run:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+This requires the dependencies listed in `pyproject.toml` to be installed.
+
 ## Claude Desktop Configuration
 
 The `claude_desktop_config.json` file includes an example entry pointing to the `complaints.py` script. Replace `INSERTPATH` with the path to this repository on your machine and import the configuration into Claude Desktop.
