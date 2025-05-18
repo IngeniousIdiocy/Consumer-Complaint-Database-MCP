@@ -43,3 +43,8 @@ The server runs over stdio only and waits for requests from an MCP-aware client 
 
 The `claude_desktop_config.json` file includes an example entry pointing to the `complaints.py` script. Replace `INSERTPATH` with the path to this repository on your machine and import the configuration into Claude Desktop.
 
+
+## References
+
+- [CFPB Consumer Complaint Database API documentation](https://cfpb.github.io/ccdb5-api/documentation/) – underlying API used by this MCP server.
+- [Model Context Protocol quickstart tutorial](https://modelcontextprotocol.io/quickstart/server) – tutorial that helped build this example.
