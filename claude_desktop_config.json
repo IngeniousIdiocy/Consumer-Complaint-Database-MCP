@@ -1,0 +1,13 @@
+{
+    "mcpServers": {
+    "Banking Complaints": {
+      "command": "/opt/homebrew/bin/uv",
+      "args": [
+        "--directory",
+        "/Users/INSERTPATH/complaints.py",
+        "run",
+        "complaints.py"
+      ]
+    }
+  }
+}
