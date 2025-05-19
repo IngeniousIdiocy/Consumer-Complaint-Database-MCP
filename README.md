@@ -15,9 +15,14 @@ This repository contains a local-only [MCP](https://www.anthropic.com/news/model
 
 Required Python packages are listed in `pyproject.toml` and include `httpx`, `mcp[cli]`, and `python-dateutil`.
 
-## Setup
+## Setup (optional)
 
-Install dependencies with `uv`:
+`uv run` automatically creates a virtual environment, locks your dependencies,
+syncs them, and then executes the script. If you plan to launch the server with
+`uv run complaints.py`, you can skip installing requirements ahead of time.
+
+For users who prefer to pre-install packages or use plain `pip`, install
+dependencies with `uv`:
 
 ```bash
 uv pip install -r pyproject.toml
