@@ -48,6 +48,47 @@ _CFPB_ENDPOINT = (
     "https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/"
 )
 
+# Valid product categories accepted by the CFPB API
+_PRODUCT_CATEGORIES: list[str] = [
+    "Checking or savings account",
+    "Credit card",
+    "Credit reporting or other personal consumer reports",
+    "Debt collection",
+    "Money transfer, virtual currency, or money service",
+    "Mortgage",
+    "Payday loan, title loan, or personal loan",
+    "Vehicle loan or lease",
+    "Student loan",
+    "Other financial service",
+]
+
+# Top 20 formal bank names accepted by the CFPB
+_TOP_20_BANKS: list[str] = [
+    "JPMorgan Chase Bank, N.A.",
+    "Bank of America, N.A.",
+    "Wells Fargo Bank, N.A.",
+    "Citibank, N.A.",
+    "U.S. Bank National Association",
+    "PNC Bank N.A.",
+    "Truist Bank",
+    "Goldman Sachs Bank USA",
+    "TD Bank, N.A.",
+    "Capital One Bank (USA), N.A.",
+    "Charles Schwab Bank, SSB",
+    "Fifth Third Bank, National Association",
+    "The Bank of New York Mellon",
+    "State Street Bank and Trust Company",
+    "BMO Bank N.A.",
+    "Ally Bank",
+    "Citizens Bank, N.A.",
+    "Regions Bank",
+    "KeyBank National Association",
+    "Huntington National Bank",
+    "Santander Holdings USA, Inc.",
+    "Navy Federal Credit Union",
+    "Rocket Mortgage, LLC",
+]
+
 
 @dataclass(slots=True)
 class Complaint:
@@ -167,7 +208,7 @@ async def search_complaints(
         bool,
         "Set to `true` to return only complaints that include consumer narrative text."
     ] = False,
-) -> List[Complaint]:
+) -> object:
     """
     Query parameters mirror the public CFPB API.
 
@@ -207,7 +248,19 @@ async def search_complaints(
     if narrative_only:
         es_query["has_narrative"] = "true"
 
-    return await _fetch_cfpb(es_query)
+    results = await _fetch_cfpb(es_query)
+    if not results:
+        message = (
+            "The query produced zero results. This often happens when the bank name "
+            "is too casual or the product category is misidentified.\n\n"
+            "* Valid product categories:\n  - "
+            + "\n  - ".join(_PRODUCT_CATEGORIES)
+            + "\n\n"
+            "* Top 20 formal bank names accepted by the CFPB:\n  - "
+            + "\n  - ".join(_TOP_20_BANKS)
+        )
+        return {"system_message": message}
+    return results
 
 
 # --------------------------------------------------------------------------- #
